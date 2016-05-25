@@ -6,7 +6,7 @@ import binascii
 d_check = '010300000001840a'
 d_reply = '01030200017984'
 
-#modify 2
+#modify 3
 
 port = serial.Serial('COM1')
 
