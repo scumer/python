@@ -7,8 +7,8 @@ def main():
     sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    
     sk.settimeout(100)    
 
-    ip = '192.168.33.189'
-    port = 8080
+    ip = '180.168.156.226'
+    port = 30025
     try:    
         start = time.time()		
         sk.connect((ip,port))  

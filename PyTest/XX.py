@@ -1,1 +1,6 @@
-__author__ = 'xuhui'
+# coding=utf-8
+
+
+
+print '\xb5\xc7\xc2\xbc\xca\xa7\xb0\xdc'.encode('utf-8')
+

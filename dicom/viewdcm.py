@@ -12,6 +12,7 @@ from dicom.filereader import read_file
 
 filename = r'E:\Project\Python\dicom\306.dcm'
 filenameb = r'E:\Project\Python\dicom\qrcode.jpg'
+filenamec = r'E:\Project\Python\dicom\dcm\WADO.dcm'
 
 class DCMWidget(QWidget):
     def __init__(self, parent=None, flags=Qt.Widget):
@@ -19,7 +20,7 @@ class DCMWidget(QWidget):
         
         #self.painter = QPainter(self)        
         
-        self.dcmdata = read_file(filename)
+        self.dcmdata = read_file(filenamec)
         self.row = self.dcmdata.Rows  # width
         self.column = self.dcmdata.Columns  # height
         self.modality = self.dcmdata.Modality
