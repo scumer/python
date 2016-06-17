@@ -7,7 +7,7 @@ import qrcode as qr
 from Crypto.Cipher import AES
 from wechatpy.crypto.pkcs7 import PKCS7Encoder
 
-url_prefix = r'http://pacs.winning.com.cn/scan/bind?card='
+url_prefix = r'http://pacs.winning.com.cn/pat_test/scan/bind?card='
 # url_prefix = r'http://pacs.winning.com.cn/pat_test/scan/bind?card='
 
 
@@ -62,10 +62,7 @@ pat = [
 ]
 
 pat = [
-[u'席祥太','42502634500','133012001177680',u'男','021'],
-[u'郭晓霞','42502634500','K03650637',u'女','021'],
-[u'张礼萍','42502634500','K03650637',u'女','021'],
-[u'赵建军','42502634500','133012001183707',u'男','021'],
+[u'田旭东','425016155','143608300447902',u'男','021'],
 ]
 '''
 ex:
