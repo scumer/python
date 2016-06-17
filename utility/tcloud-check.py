@@ -1,4 +1,4 @@
-﻿# coding=utf-8
+# coding=utf-8
 
 from __future__ import unicode_literals
 from datetime import date, timedelta
@@ -8,6 +8,7 @@ import socket
 import requests
 import time
 import HTMLParser
+import textwrap
 
 from prettytable import PrettyTable 
 import xmltodict
@@ -25,6 +26,8 @@ tcloud_conf = [
 {'hosp': u'嘉定中心',   'addr':'http://180.153.70.144:90'},
 {'hosp': u'卢湾个渣渣', 'addr':'http://180.168.156.226:30025'},
 {'hosp': u'龙华医院',   'addr':'http://180.169.35.28:30025'},
+{'hosp': u'珠海五院',   'addr':'http://113.106.107.210:30025'},
+#{'hosp': u'江湾社区卫生服务中心', 'addr':'http://222.44.22.227:30026'},  # 铁通网络
 ]
 
 url_strip = lambda urlstr : urlstr.replace('http://','').strip('/ \t\r\n\\')
@@ -46,13 +49,18 @@ class WS_API():
         sql = 'select top 1 studytime from pacs_study order by studytime desc'
         sql = sql.format(date.today(),date.today()+timedelta(1))
         result = self.exec_sql(sql)
+
+        
+        error = result.get('string', {}).get('#text','') if result else ''
+
         # import json
         # print json.dumps(result, indent=2)
+        studytime = ''
         if result:
             studytime = result.get('string', {}).get('NewDataSet',{}).get('DataList', {}).get('studytime', '')
             studytime = studytime.replace('T',' ')[:-6]
             # 2016-05-11T16:44:43+08:00
-            return studytime
+        return studytime, error
 
     def exec_sql(self, sql):
         header = {'Content-Disposition': 'form-data'}
@@ -107,6 +115,7 @@ def main():
         header=True)  
     table.align[u"医院名称"] = "l"    
     table.align[u"云影地址"] = "l"     
+    table.align[u"错误信息"] = "l"     
     table.padding_width = 1
     
     #init progress
@@ -137,10 +146,10 @@ def main():
             if ws:
                 # count = study_count_of_today(ws)
                 count = WS_API(ws).studycount_of_today()
-                latest_time =  WS_API(ws).latest_studytime()
+                latest_time, errdesc =  WS_API(ws).latest_studytime()
         else:
             network = u'×'
-
+        errdesc = textwrap.fill(errdesc,40)
         table.add_row([name, network, count, latest_time,tcloud, errdesc])
 
     pbar.finish()
