@@ -57,40 +57,34 @@ class WS_API():
 
 def upload_film_info():
     studyuid = '1.3.6.1.4.1.19439.0.108707908.20160329084323.1493.15482055'
-    inf = {
-        "HospCode": "425026521",
-        "PatSex": "M",
-        "PatAge": "",
-        "PatName": "",
-        "PatID": "",
-        "AccessionNo": "",
-        "studyUID": studyuid,
-        "films": [
-          {
-              "objectUID": "",
-              "seriesUID": "",
-              "studyUID": studyuid
-          },
-            {
-              "objectUID": "",
-              "seriesUID": "",
-              "studyUID": studyuid
-          },
-            {
-              "objectUID": "",
-              "seriesUID": "",
-              "studyUID": studyuid
-          }
-        ],
-    }
-
+    inf =   {
+    "HospCode": "9999", 
+    "PatAge": '', 
+    "PatName": "***", 
+    "films": [
+      {
+        "objectUID": "1.3.6.1.4.1.19439.2.000001.066077080.0.20160622102805.001747", 
+        "seriesUID": "1.3.6.1.4.1.19439.1.000001.066077080.0", 
+        "studyUID": "1.3.6.1.4.1.19439.0.000001.066077080.0"
+      }, 
+      {
+        "objectUID": "1.3.6.1.4.1.19439.2.000001.066077080.0.20160622102809.001760", 
+        "seriesUID": "1.3.6.1.4.1.19439.1.000001.066077080.0", 
+        "studyUID": "1.3.6.1.4.1.19439.0.000001.066077080.0"
+      }, 
+    ], 
+    "PatSex": "F", 
+    "AccessionNo": 'A10262222', 
+    "studyUID": "1.3.6.1.4.1.19439.0.000001.066077080.0", 
+    "PatID": "16-11632"
+  }
     server = r'http://medical-tech.winning.com.cn/platform/xuhui/dingdang'
-    # ret = requests.post(server, json=(inf))
-    # print ret,ret.text
+    ret = requests.post(server, json=(inf))
+    print ret,ret.text
 
 
 def upload_film_data(upload=False, **args):
-    inf = {
+    inf = [{
         "HospCode": args['HospCode'],
         "PatSex": args['PatSex'],
         "PatAge": args['PatAge'],
@@ -98,44 +92,35 @@ def upload_film_data(upload=False, **args):
         "PatID": args['PatID'],
         "AccessionNo": args['AccessionNo'],
         "studyUID": args['studyUID'],
-        "films": args['films'],
-    }
+        "films": [args['films']] if type(args['films']) != list else args['films'],
+    }]
 
     server = r'http://medical-tech.winning.com.cn/platform/xuhui/dingdang'
     print '>>>>>>>>>>upload data'
     print json.dumps(inf, indent=2)
     if upload:
-        ret = requests.post(server, json=(inf))
+        ret = requests.post(server, json=inf)
         print ret, ret.text
 
 
 def query_pat_info(ws_url, studyuid, hospcode):
-    # hospital_code = hospcode
-
-    # url = 'http://101.231.40.242:7345/pem/service.asmx'
-    # url = 'http://127.0.0.1/pem/service.asmx'
-
-    # studyuid = '1.3.6.1.4.1.19439.0.108707908.20160615084008.1750.15705743' # liuyuan
-    # studyuid = '1.2.840.1.19439.0.100000000.20150421094558.1517.10000.62502'
-    # #local
-
-    # AccessionNo = 'A102756151'
-
     ws = WS_API(ws_url)
 
-    # result = ws.exec_sql('select top 1 * from pacs_study order by inserttime desc')
-    # print json.dumps(result, indent=2) if result else ''
+    result = ws.exec_sql("select top 1 * from pacs_study where modality= 'CT' order by inserttime desc")
+    # result = ws.exec_sql("select top 1 Sex as PatSex, Age as PatAge, PatName,PatID,AccessionNo,studyUID from pacs_study where patid='%s'" % '1940245')
+    print '>>>>>>>>>latest study'
+    print json.dumps(result, indent=2) if result else ''
 
     sql_pat_info = "select top 1 Sex as PatSex, Age as PatAge, PatName,PatID,AccessionNo,studyUID from pacs_study where studyuid='%s'" % studyuid
+    # sql_pat_info = "select top 1 Sex as PatSex, Age as PatAge, PatName,PatID,AccessionNo,studyUID from pacs_study where patid='%s'" % '3423444'
     # sql_pat_info = "select top 1 Sex as PatSex, Age as PatAge, PatName,PatID,AccessionNo,studyUID from pacs_study where AccessionNo='%s'" % AccessionNo
     result = ws.exec_sql(sql_pat_info)
-    pat_info = result.get('string', {}).get(
-        'NewDataSet', {}).get('DataList', {})
+    pat_info = result.get('string', {}).get('NewDataSet', {}).get('DataList', {}) if result else {}
     print '>>>>>>>>>>patient info'
     print json.dumps(pat_info, indent=2) if pat_info else json.dumps(result, indent=2) if result else ''
 
     sql_film_uid = """
-  SELECT C.imageuid as objectUID,B.seriesuid as seriesUID,A.studyuid as studyUID, B.Modality as Modality FROM pacs_study A,pacs_series B,pacs_image C
+  SELECT C.imageuid as objectUID,B.seriesuid as seriesUID,A.studyuid as studyUID FROM pacs_study A,pacs_series B,pacs_image C
   WHERE studyuid='{studyuid}'
   AND B.studyid=A.studyid
   AND C.studyid=A.studyid
@@ -144,8 +129,7 @@ def query_pat_info(ws_url, studyuid, hospcode):
   """.format(studyuid=studyuid)
 
     result = ws.exec_sql(sql_film_uid)
-    film_info = result.get('string', {}).get(
-        'NewDataSet', {}).get('DataList', {})
+    film_info = result.get('string', {}).get('NewDataSet', {}).get('DataList', {}) if result else {}
     film_info = {'films': film_info} if film_info else {}
     print '>>>>>>>>>>film info'
     print json.dumps(film_info, indent=2) if film_info else json.dumps(result, indent=2) if result else ''
@@ -158,27 +142,29 @@ def query_pat_info(ws_url, studyuid, hospcode):
 
     return upload_data
 
-    # [studyuid,sex,age,name,patid,accession_no,hospcode,films]
-
-# studyuid 1.3.6.1.4.1.19439.0.108707908.20160329084323.1493.15482055  accession_no = A102756151
-# studyuid 1.2.840.113619.2.340.3.481065488.564.1458858949.176
-# A102749925
 
 if __name__ == '__main__':
     # 六院
-    hospital_code = '425026521'
+    hospital_code = '9999'
     url = 'http://101.231.40.242:7345/pem/service.asmx'
     studyuid = '1.3.6.1.4.1.19439.0.108707908.20160615084008.1750.15705743'
+    studyuid = '1.3.6.1.4.1.19439.0.108707908.20160118074643.1697.15310500'
 
     # local test
-    url = 'http://127.0.0.1/pem/service.asmx'
-    studyuid = '1.2.840.1.19439.0.100000000.20150421094558.1517.10000.62502'
+    url = 'http://180.168.156.226:30025/PEM/service.asmx'
+    # studyuid = '1.2.840.1.19439.0.100000000.20150421094558.1517.10000.62502'
 
     upload_data = query_pat_info(
         ws_url=url, studyuid=studyuid, hospcode=hospital_code)
 
-    if upload_data:
-        upload_film_data(upload=False, **upload_data)
+    # if upload_data:
+    #     upload_film_data(upload=False, **upload_data)
+        # upload_film_info()
 
+    # ws = WS_API(url)
+
+    # result = ws.exec_sql('select top 1 * from pacs_study order by inserttime desc')
+    # # result = ws.exec_sql("update pacs_study set HospName='医疗结构'")
+    # print json.dumps(result, indent=2) if result else ''
 
 

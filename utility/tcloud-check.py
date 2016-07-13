@@ -24,7 +24,7 @@ tcloud_conf = [
 {'hosp': u'邵逸夫医院', 'addr':'http://121.43.186.154'},
 {'hosp': u'同济医院',   'addr':'http://180.166.182.146:30025'},
 {'hosp': u'嘉定中心',   'addr':'http://180.153.70.144:90'},
-{'hosp': u'卢湾个渣渣', 'addr':'http://180.168.156.226:30025'},
+{'hosp': u'卢湾', 'addr':'http://180.168.156.226:30025'},
 {'hosp': u'龙华医院',   'addr':'http://180.169.35.28:30025'},
 {'hosp': u'珠海五院',   'addr':'http://113.106.107.210:30025'},
 #{'hosp': u'江湾社区卫生服务中心', 'addr':'http://222.44.22.227:30026'},  # 铁通网络
@@ -44,6 +44,15 @@ class WS_API():
         result = self.exec_sql(sql)
         if result:
             return result.get('string', {}).get('NewDataSet',{}).get('DataList', {}).get('Column1', '0')
+        return 0
+
+    def studycount(self):
+        sql = 'select count(*) from pacs_study'
+        sql = sql.format(date.today(),date.today()+timedelta(1))
+        result = self.exec_sql(sql)
+        if result:
+            return result.get('string', {}).get('NewDataSet',{}).get('DataList', {}).get('Column1', '0')
+        return 0
 
     def latest_studytime(self):
         sql = 'select top 1 studytime from pacs_study order by studytime desc'
@@ -100,6 +109,28 @@ def telnet(ip, port):
         sk.close()
     return False
 
+
+PROXIES = {
+  "http": "http://127.0.0.1:8787",
+  "https": "http://127.0.0.1:8787",
+}
+
+def web_check(url,timeout=2):
+    try:
+        errdesc = ''
+        is_success = ''
+
+        ret = requests.head(url, timeout=timeout) # , proxies=PROXIES
+        if ret.status_code != 200:
+            errdesc = 'Connect Error:'+str(ret.status_code)
+    except ConnectTimeout:
+        errdesc = 'Connect Timeout'
+    except Exception as e:
+        errdesc = 'Conncet Error:'+e.message
+    finally:
+        return True if not errdesc else False, errdesc
+
+
 def url_parse(url):
     if url:
         url = url.replace('http://','')
@@ -111,7 +142,7 @@ def url_parse(url):
 
 def main():
     # init table format
-    table = PrettyTable([u'医院名称', u'网络状态', u'今日检查数量',u'最近检查时间', u'云影地址', u'错误信息'],
+    table = PrettyTable([u'医院名称', u'网络状态', u'网络延迟', u'今日检查数量',u'历史检查数量',u'最近检查时间', u'云影地址', u'错误信息'],
         header=True)  
     table.align[u"医院名称"] = "l"    
     table.align[u"云影地址"] = "l"     
@@ -129,31 +160,37 @@ def main():
         
         name = tcloud.get('hosp','')
         count = 0 # study count
+        count_of_all = 0
         network = u'×'
         errdesc = ''
         latest_time = ''
+        time_tcloud = ''
+        time_ws = ''
 
         addr = tcloud.get('addr','')
         tcloud = tcloud_url(addr)
 
-        ip, port = url_parse(addr)
-        
-        if telnet(ip, port):
+        time_start = time.time()
+        conn, errdesc = web_check(tcloud) 
+        time_tcloud =  '%.3f' % (time.time()-time_start)
+
+        if conn:
             network = u'√'
 
             # study count
             ws = webservice_url(addr)
             if ws:
-                # count = study_count_of_today(ws)
+                time_start = time.time()
                 count = WS_API(ws).studycount_of_today()
                 latest_time, errdesc =  WS_API(ws).latest_studytime()
+                count_of_all =  WS_API(ws).studycount()
+                time_ws =  '%.3f' % ((time.time()-time_start)/2.0)
         else:
             network = u'×'
         errdesc = textwrap.fill(errdesc,40)
-        table.add_row([name, network, count, latest_time,tcloud, errdesc])
+        table.add_row([name, network, time_tcloud+'/'+ time_ws,count, count_of_all,latest_time,tcloud, errdesc])
 
     pbar.finish()
-    # print table.__unicode__()
 
     tb_data = table.get_string()
     tb_len = tb_data.index('\n')
