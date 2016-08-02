@@ -1,36 +1,86 @@
 # coding=utf-8
 from __future__ import unicode_literals
 import requests
+<<<<<<< HEAD
+import json
+
+
+url = 'http://139.196.167.82/wechat'
+url = 'http://127.0.0.1:6234/wechat?signature=d082b9911b051e73ffc69c9080ff25e2718fa0cf&timestamp=1464602899&nonce=835732096'
+=======
 
 url = 'http://139.196.167.82/wechat'
 url = 'http://127.0.0.1:6234/wechat?signature=d082b9911b051e73ffc69c9080ff25e2718fa0cf&timestamp=1464602899&nonce=835732096'
 
 url = 'http://vwraieoyhh.proxy.qqbrowser.cc'
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 url = 'http://127.0.0.1:6234'
 url = 'http://139.196.167.82'
 
 auth_token = 'WyI1NzRjZjZjOTE0YzEzNDBjYTY2ODljZmUiLCJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSJd.Ci6UNA.ipVFL5TBPoEsvOa1ziVr-y-1Ynw'
 auth_token = 'WyI1NzRjZWJmNDZjNjI3MjFhNTQ2MWJiZmQiLCJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSJd.CjVXrQ.OHOC-5co9FQXUluYJ9uEgr8ZDC8' #feihui
+<<<<<<< HEAD
+auth_token = 'WyI1NzRjZWJmNDZjNjI3MjFhNTQ2MWJiZmQiLCJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSJd.CnIW0A.xl-V4sEJffsI2gijqIx_acBLap8' #feihui
+# auth_token = 'WyI1NzRiZmYyNTZjNjI3MjA4NTBmOGQyZjYiLCJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSJd.Cni3AQ.HUSA4GzvUcHcagnpw9YmALrvLH8' #xuhui
+
+header = {'Authentication':auth_token}
+
+def repr_dict(d):
+    return '{%s}' % ',\n'.join("'%s': '%s'" % pair for pair in d.iteritems())
+
+def exec_api(api,data=None):
+    try:
+        ret = requests.get(url+api, json=data, headers=header)
+        print '\napi:',api
+        ret.raise_for_status()
+        print json.dumps(ret.json(), ensure_ascii=False, indent=2) if ret.json() else 'No Json Result!'
+    except Exception, e:
+        print e
+
+header = {'Authentication':auth_token}
+=======
 header = {'Authentication':auth_token}
 
 
 def exec_api(api,data=None):
 	ret = requests.get(url+api, json=data, headers=header)
 	print '\napi:\n',api,'\n', ret, '\n' ,ret.text
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 
 
 #unbind
 api = '/wechat/card/unbind'
 query = {'citycode':'021', 'cardno':'123', 'name':u'解绑', 'sex':u'男'}
+<<<<<<< HEAD
+
+# ret = requests.post(url+api, json=query)
+# print json.dumps(ret.json(), ensure_ascii=False, indent=2) if ret.json() else 'No Json Result!'
+
+
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # ret = requests.post(url+api, data=query, headers=header)
 # print '\napi:\n',api,'\n', ret, '\n' ,ret.text
 
 # /api/card/query
+<<<<<<< HEAD
+
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 api = '/api/card/query'
 query={'query':{'cityCode':'021',},'skip': 40,'number': 50}
 # exec_api(api,query)
 
 
+<<<<<<< HEAD
+
+api = '/api/card/user'
+# exec_api(api)
+
+api = '/api/report/card/user'
+
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # /api//card/user
 api = '/api/card/user'
 # exec_api(api)
@@ -48,11 +98,28 @@ api = '/api/card/'+cardid
 
 
 # /api/report/query
+<<<<<<< HEAD
+
+cardid = '55c0288ea47e73282221ff35' #Ris
+api = '/api/report/query/'+cardid
+# query={'card':cardid}
+exec_api(api)
+
+
+#/api/report/<cardid>
+=======
 cardid = '55c0288ea47e73282221ff3e' #Ris
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # cardid = '55938b28a47e733c4e1ad40e' #Us
 api = '/api/report/query'
 # query={'query':{'card':cardid}}
 # exec_api(api,query)
+<<<<<<< HEAD
+
+
+#/api/report/<cardid>
+cardid = '57046490d52c9e2e606bf516'
+=======
 # "55c02940a47e73282221ff52", 
 # "5721d75314c1340c738611d3"
 #57046490d52c9e2e606bf516
@@ -60,13 +127,17 @@ api = '/api/report/query'
 #/api/report/<cardid>
 cardid = '57046490d52c9e2e606bf516'
 # cardid = '55c02447a47e73282221fed6' #   feihui
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 api = '/api/report/query/' + cardid
 # exec_api(api,query)
 
 
 
 # /api/report/<reportid>
+<<<<<<< HEAD
+=======
 reportid = '55c02940a47e73282221ff52' # Ris
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # reportid = '55938c04a47e733c4e1ad410' # US
 api = '/api/report/'+reportid
 # exec_api(api)
@@ -74,7 +145,15 @@ api = '/api/report/'+reportid
 #/api/queue/query
 cardid = '55c0288ea47e73282221ff3e' #Ris
 api = '/api/queue/query'
+<<<<<<< HEAD
+
+query={'query':{'card':cardid}}
+
 # query={'query':{'card':cardid}}
+
+=======
+# query={'query':{'card':cardid}}
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # exec_api(api, query)
 
 #/api/queue/<queue_id>
@@ -87,8 +166,11 @@ api = '/api/queue/'+queueid
 api = '/api/queue/user'
 # exec_api(api, query)
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 #/api/film/
 reportid = '55c02940a47e73282221ff52'
 api = '/api/film/'+reportid
@@ -115,10 +197,16 @@ code = '188888888'
 api = '/api/code/bar/' + code
 # /api/code/qr/study/<reportid>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 #/api/report/png/<reportid>
 
 
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -127,6 +215,7 @@ api = '/api/code/bar/' + code
 
 
 
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 # 第三方调用报告
 
 HTTP_REFERER = ''
@@ -154,6 +243,20 @@ report_type = 'lis'
 
 
 
+<<<<<<< HEAD
+
+# hosp = '425016155'
+# studyuid = '1.2.840.1.4.1.194.0.100000000.20151020151048.1747.10000.2624204'
+# view_type = 'pc'
+# url = 'http://pacs.winning.com.cn/pat_test'+'/tcloud/' + hosp + '/' +view_type+ '/' + studyuid
+# url = 'http://pacs.winning.com.cn/tcloud/425016155/webview/1.2.840.113704.1.111.5132.1436470478.1'
+# print url
+# ret = requests.get(url)
+# print ret
+# print ret.text
+
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 hosp = '425016155'
 studyuid = '1.2.840.1.4.1.194.0.100000000.20151020151048.1747.10000.2624204'
 view_type = 'pc'

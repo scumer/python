@@ -8,7 +8,15 @@ from Crypto.Cipher import AES
 from wechatpy.crypto.pkcs7 import PKCS7Encoder
 
 url_prefix = r'http://pacs.winning.com.cn/pat_test/scan/bind?card='
+<<<<<<< HEAD
+<<<<<<< HEAD
+url_prefix = r'http://139.196.167.82/pat_test/scan/bind?card='
+=======
 # url_prefix = r'http://pacs.winning.com.cn/pat_test/scan/bind?card='
+>>>>>>> parent of 6ebce69... Generate Pelican site
+=======
+# url_prefix = r'http://pacs.winning.com.cn/pat_test/scan/bind?card='
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 
 
 class EncryptConf(object):
@@ -57,12 +65,27 @@ def gen_qrcode(pat):
         make_qr(gen_bind_url_redirect(bind), u'./qrcode/{0}.jpg'.format(bind['n'] + bind['cn']))
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+# pat = [
+# [u'杨素芳','425016155','P22580773',u'女','021'],
+# ]
+
+pat = [
+[u'XH','9999','12345',u'男','021'],
+=======
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 pat = [
 [u'杨素芳','425016155','P22580773',u'女','021'],
 ]
 
 pat = [
 [u'田旭东','425016155','143608300447902',u'男','021'],
+<<<<<<< HEAD
+>>>>>>> parent of 6ebce69... Generate Pelican site
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 ]
 '''
 ex:

@@ -112,7 +112,16 @@ mbreport = [{"CardNo":"P0947276X","HospNo":"143608300502095","PatName":"张国�
 # upload(url+'/platform/microbe/report/upload', mbreport)
 
 #RISReport
+<<<<<<< HEAD
+<<<<<<< HEAD
+risreport = {"CardNo":"P0947276X",
+"PatName":u"张国英","Sex":u"女","HospitalCode":"425016155","ApplyNo":"154906201",
+=======
 risreport = {"CardNo":"P0947276X","PatName":u"张国英","Sex":u"女","HospitalCode":"425016155","ApplyNo":"154906201",
+>>>>>>> parent of 6ebce69... Generate Pelican site
+=======
+risreport = {"CardNo":"P0947276X","PatName":u"张国英","Sex":u"女","HospitalCode":"425016155","ApplyNo":"154906201",
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 "BedNo":"","StudyUID":"1.3.6.1.4.1.19439.0.108707908.20160330150900.1413.15490620","InsertTime":"2016-3-30 16:52:02",
 "UpFlag":"0","StudyItem":"胸部","TechNo":"3523361","Age":"39岁","WardName":"","StudyResult":"1.两肺纹理略增多，请结合临床。2.右上肺小钙化灶。",
 "uploadCount":"0","PatNameSpell":"ZCL","HospNo":"20160000161215","ReportSource":"pa",
@@ -122,9 +131,208 @@ risreport = {"CardNo":"P0947276X","PatName":u"张国英","Sex":u"女","HospitalC
 "ReportDesc":"普放","CityCode":"021","LabelID":"A102761210","AuditingTime":"2016-3-30 16:49:22","StudyMethod":"","isAgainShare":"1","FailedReason":"","ShareEndDate":"",
 "WardOrReg":"0","SendHttpStat":"","SendHttpJson":""}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+# upload(url+'/platform/report/upload', risreport)
+
+#film
+film = {"studyUID":"1","PatName":u"中文","PatID":"1","PatSex":"F","PatAge":"039Y","AccessionNo":"1","HospCode":"425026521","films":[{"studyUID":"123","seriesUID":"1.3.6.1.4.1.19439.1.100000000.20160330162041.1110","objectUID":"1.2.840.2.1000001.1000001.20160330161914.1016118"}]}
+# upload(url+'/platform/xuhui/dingdang', data = film)
+
+
+ct1report = {'PatName': '***',
+'CardNo': '1330****4781',
+'Sex': '男',
+'HospitalCode': '9999',
+'SubSysCode': 'RIS_FS',
+'ApplyDeptName': '',
+'Age': '31岁',
+'StudyUID': '1.3.6.1.4.1.19439.0.108707908.20160118102201.1623.15311498',
+'ReportDesc': 'CT',
+'StudyItem': "骨盆CT平扫（三维)",
+'LabelID': "A102651149",
+'PatNameSpell': 'ZCL',
+'StudyObservation': '骨盆诸骨局部增生变尖，两髋及骶髂关节在位、形态可，骨端边缘稍尖，关节间隙无明显狭窄。右股骨头见囊状低密度影，边界清楚，直径约0.9cm。周边未见异常软组织影。   ',
+'StudyResult': '1.骨盆及双髋关节退变。2.右股骨头低密度灶，考虑良性，骨内腱鞘囊肿可能，请结合临床。 ',
+'StudyMethod': '',
+'SendHttpJson': '',
+'ApplyNo': '1549***01',
+'ReportSource': 'pa',
+'SendHttpStat': '',
+'FinallyEditTime': '2016-3-30 16:51:30',
+'IDNum': '',
+'ImageStatus': '',
+'BedNo': '',
+'UpFlag': '0',
+'InsertTime': '2016-3-30 16:52:02',
+'uploadCount': '0',
+'ShareEndDate': '',
+'isAgainShare': '1',
+'ReportDoctorName': '***',
+'WardOrReg': '0',
+'HospNo': '20160000161215',
+'CityCode': '021',
+'VerifyDoctorName': '***',
+'ReportTime': '2016-3-30 16:27:34',
+'TechNo': '3423444',
+'ShareBeginDate': '',
+'modifyTime': '',
+'FailedReason': '',
+'AuditingTime': '2016-3-30 16:49:22',
+'WardName': '',
+'ShareFlag': '0',
+}
+
+url = r'http://medical-tech.winning.com.cn'
+# upload(url+'/platform/report/upload', ct1report)
+
+usreport = {'PatName': '***',
+'CardNo': '1330****4781',
+'Sex': '男',
+'HospitalCode': '9999',
+'SubSysCode': 'RIS_FS',
+'TechNo': '01130820160621',
+'ApplyDeptName': '心内科(心血管疾病联合诊疗部)',
+'Age': '31岁',
+'StudyUID': '1.2.840.113663.1500.1.397820462.1.1.20160621.81301.609',
+'ReportDesc': '彩超',
+'StudyItem': "双侧甲状腺",
+'LabelID': "A10261111",
+'PatNameSpell': 'ZCL',
+'StudyObservation': '双侧甲状腺结节',
+'StudyResult': '双侧甲状腺结节，建议复查随访。',
+'StudyMethod': '',
+'SendHttpJson': '',
+'ApplyNo': '154***01',
+'ReportSource': 'pa',
+'SendHttpStat': '',
+'FinallyEditTime': '2016-3-30 16:51:30',
+'IDNum': '',
+'ImageStatus': '',
+'BedNo': '',
+'UpFlag': '0',
+'InsertTime': '2016-3-30 16:52:02',
+'uploadCount': '0',
+'ShareEndDate': '',
+'isAgainShare': '1',
+'ReportDoctorName': '***',
+'WardOrReg': '0',
+'HospNo': '20160000161215',
+'CityCode': '021',
+'VerifyDoctorName': '***',
+'ReportTime': '2016-3-30 16:27:34',
+
+'ShareBeginDate': '',
+'modifyTime': '',
+'FailedReason': '',
+'AuditingTime': '2016-3-30 16:49:22',
+'WardName': '',
+'ShareFlag': '0',
+}
+# upload(url+'/platform/report/upload', usreport)
+
+njreport = {'PatName': '***',
+'CardNo': '133****167',
+'Sex': '女',
+'HospitalCode': '9999',
+'SubSysCode': 'RIS_FS',
+'TechNo': '16-11632',
+'ApplyDeptName': '消化内科',
+'Age': '31岁',
+'StudyUID': '1.3.6.1.4.1.19439.0.000001.066077080.0',
+'ReportDesc': '胃镜',
+'StudyItem': "胃部内镜",
+'LabelID': "A10262222",
+'PatNameSpell': 'ZCL',
+'StudyObservation': '食道：食管黏膜光滑柔软，血管纹理清晰，扩张度好，齿状线清晰。 贲门：未见明显异常胃底：见一0.5cm带蒂息肉，胃体：粘膜充血水肿。大弯侧见一0.5cm带蒂息肉胃角：光滑。胃窦：粘膜充血水肿，见散在斑片状糜烂。幽门：孔圆，收缩可，未见返流。十二指肠：粘膜无殊。',
+'StudyResult': '浅表性胃窦炎伴糜烂。建议待病理，建议治疗后近期复查。必要时上腹部CT。胃镜检查两小时后进食温冷流质。',
+'StudyMethod': '',
+'SendHttpJson': '',
+'ApplyNo': '154***02',
+'ReportSource': 'pa',
+'SendHttpStat': '',
+'FinallyEditTime': '2016-3-30 16:51:30',
+'IDNum': '',
+'ImageStatus': '',
+'BedNo': '',
+'UpFlag': '0',
+'InsertTime': '2016-3-30 16:52:02',
+'uploadCount': '0',
+'ShareEndDate': '',
+'isAgainShare': '1',
+'ReportDoctorName': '***',
+'WardOrReg': '0',
+'HospNo': '20160000161215',
+'CityCode': '021',
+'VerifyDoctorName': '***',
+'ReportTime': '2016-3-30 16:27:34',
+
+'ShareBeginDate': '',
+'modifyTime': '',
+'FailedReason': '',
+'AuditingTime': '2016-3-30 16:49:22',
+'WardName': '',
+'ShareFlag': '0',
+}
+# upload(url+'/platform/report/upload', njreport)
+
+
+
+
+ct2report = {'PatName': '***',
+'CardNo': '1330****4781',
+'Sex': '男',
+'HospitalCode': '9999',
+'SubSysCode': 'RIS_FS',
+'ApplyDeptName': '',
+'Age': '31岁',
+'StudyUID': '1.3.6.1.4.1.19439.0.108707908.20160118074643.1697.15310500',
+'ReportDesc': 'CT',
+'StudyItem': "左锁骨CT平扫（三维）",
+'LabelID': "A102650513",
+'TechNo': '1940245',
+'PatNameSpell': 'ZCL',
+'StudyObservation': '左锁骨近肩峰端后方骨皮质局限性突起，密度降低，左肩锁关节在位，关节面下见小囊样改变，未见异常软组织影。',
+'StudyResult': '1.左锁骨近肩峰端后方骨皮质局限性突起伴密度降低，建议ＭＲ增强扫描进一步检查。',
+'StudyMethod': '',
+'SendHttpJson': '',
+'ApplyNo': '1549***09',
+'ReportSource': 'pa',
+'SendHttpStat': '',
+'FinallyEditTime': '2016-3-30 16:51:30',
+'IDNum': '',
+'ImageStatus': '',
+'BedNo': '',
+'UpFlag': '0',
+'InsertTime': '2016-3-30 16:52:02',
+'uploadCount': '0',
+'ShareEndDate': '',
+'isAgainShare': '1',
+'ReportDoctorName': '***',
+'WardOrReg': '0',
+'HospNo': '20160000161215',
+'CityCode': '021',
+'VerifyDoctorName': '***',
+'ReportTime': '2016-3-30 16:27:34',
+
+'ShareBeginDate': '',
+'modifyTime': '',
+'FailedReason': '',
+'AuditingTime': '2016-3-30 16:49:22',
+'WardName': '',
+'ShareFlag': '0',
+}
+# upload(url+'/platform/report/upload', ct2report)
+=======
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
 upload(url+'/platform/report/upload', risreport)
 
 #film
 film = {"studyUID":"1","PatName":u"中文","PatID":"1","PatSex":"F","PatAge":"039Y","AccessionNo":"1","HospCode":"425026521","films":[{"studyUID":"123","seriesUID":"1.3.6.1.4.1.19439.1.100000000.20160330162041.1110","objectUID":"1.2.840.2.1000001.1000001.20160330161914.1016118"}]}
 upload(url+'/platform/xuhui/dingdang', data = film)
 
+<<<<<<< HEAD
+>>>>>>> parent of 6ebce69... Generate Pelican site
+=======
+>>>>>>> d1bccc8b3111a082c30248a482220829afd49af2
