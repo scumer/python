@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Poem Maker Pro</title>
+<meta charset="UTF-8">
+<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+<style type="text/css">
+    *{
+        /*margin: 0 auto;*/
+        /*padding: 0px;*/
+        /*text-align: center;*/
+        /*border: 1px solid blue;*/
+        font-family: '微软雅黑';
+    }
+    form {
+        /*width: 400px;*/
+        float: left;
+        text-align: right;
+        /*display: block;*/
+    }
+</style>
+
+</head>
+
+<body>
+    <h3 style="font-weight:normal">Enter terms below.</h3>
+        <form method="post" action="/poem" id='form'>
+            <p>Plural noun
+                <input type="text" name="noun1">
+            </p>
+            <p>Singular noun
+                <input type="text" name="noun2">
+            </p>
+            <p>Verb(past tense)
+                <input type="text" name="verb">
+            </p>
+            <p>Noun
+                <input type="text" name="noun3">
+            </p>
+            <input type="submit">
+        </form>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><root><Request><BookCenterSID>aaaa</BookCenterSID><Brlx>1</Brlx><CardNo>1</CardNo><PatName>1</PatName><Sex>1</Sex><Phone>1</Phone><IDNum>1</IDNum><HisApplyNo>1</HisApplyNo><ReportNo>ReportID</ReportNo><ReportType>1</ReportType><ReportName>1</ReportName><ReportDate>1</ReportDate><ReportDoctor></ReportDoctor><HospitalName>1</HospitalName><ReportDesc>1</ReportDesc></Request></root>
+{
+  "serviceId": "eh.regReportInfoService", 
+  "method": "regReportInfo", 
+  "body": [
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root><Request><BookCenterSID>aaaa</BookCenterSID><Brlx>1</Brlx><CardNo>1</CardNo><PatName>1</PatName><Sex>1</Sex><Phone>1</Phone><IDNum>1</IDNum><HisApplyNo>1</HisApplyNo><ReportNo>ReportID</ReportNo><ReportType>1</ReportType><ReportName>1</ReportName><ReportDate>1</ReportDate><ReportDoctor></ReportDoctor><HospitalName>1</HospitalName><ReportDesc>1</ReportDesc></Request></root>"
+  ]
+}
+200
+{"code":200,"body":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root><parameter><Confirm>F</Confirm><ErrorDesc>卡类型不能为空!</ErrorDesc></parameter></root>"}
